@@ -11,4 +11,8 @@ export class BoardService extends TypeOrmQueryService<BoardEntity> {
   constructor(@InjectRepository(BoardEntity) repo: Repository<BoardEntity>) {
     super(repo, { useSoftDelete: true });
   }
+
+  async getBoardList(): Promise<BoardEntity[]> {
+    return await this.repo.find();
+  }
 }
