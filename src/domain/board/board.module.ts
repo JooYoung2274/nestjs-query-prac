@@ -7,8 +7,9 @@ import {
 } from '@ptc-org/nestjs-query-graphql';
 import { NestjsQueryTypeOrmModule } from '@ptc-org/nestjs-query-typeorm';
 import { BoardEntity } from './board.entity';
-import { BoardDTO } from './dto/board.dto';
+
 import { BoardCreateDTO } from './dto/create-board.dto';
+import { BoardUpdateDTO } from './dto/update-board.dto';
 
 @Module({
   imports: [
@@ -21,9 +22,11 @@ import { BoardCreateDTO } from './dto/create-board.dto';
       resolvers: [
         {
           EntityClass: BoardEntity,
-          DTOClass: BoardDTO,
+          DTOClass: BoardEntity,
           CreateDTOClass: BoardCreateDTO,
+          UpdateDTOClass: BoardUpdateDTO,
           ServiceClass: BoardService,
+          enableAggregate: true,
           pagingStrategy: PagingStrategies.OFFSET,
           read: {},
           create: {},
