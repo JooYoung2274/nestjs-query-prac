@@ -1,5 +1,10 @@
 import { Field, GraphQLISODateTime, ID, ObjectType } from '@nestjs/graphql';
-import { FilterableField, IDField } from '@ptc-org/nestjs-query-graphql';
+import {
+  Authorize,
+  FilterableField,
+  FilterableRelation,
+  IDField,
+} from '@ptc-org/nestjs-query-graphql';
 import {
   Column,
   CreateDateColumn,
@@ -9,6 +14,13 @@ import {
 } from 'typeorm';
 
 @Entity()
+@Authorize({
+  authorize: (context: UserContext) => ({
+    userId: { eq: context.req.user.id },
+  }),
+})
+// UserDTO가 존재한다고 가정
+@FilterableRelation('owner', () => UserDTO)
 @ObjectType('Board')
 export class BoardEntity {
   @PrimaryGeneratedColumn()
