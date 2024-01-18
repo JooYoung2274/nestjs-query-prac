@@ -11,10 +11,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { PostEntity } from '../post/post.entity';
+import { BoardEntity } from '../board/board.entity';
 
 @Entity()
-@UnPagedRelation('post', () => PostEntity, {
+@UnPagedRelation('board', () => BoardEntity, {
   //   relationName- 관계를 검색할 때 사용할 관계의 이름 QueryService
   //   nullable- Null 허용인 경우로 true로 설정합니다.
   //   complexity- 관계 복잡도를 지정하기 위해 설정합니다.
@@ -35,8 +35,8 @@ import { PostEntity } from '../post/post.entity';
   //   pipes=[]- 엔드 포인트에 추가할 파이프 배열
   //   filters=[]- 엔드 포인트에 추가할 필터 배열
 })
-@ObjectType('Board')
-export class BoardEntity {
+@ObjectType('Post')
+export class PostEntity {
   @PrimaryGeneratedColumn()
   @IDField(() => ID) // 기존 graphql 처럼 하나의 엔티티에서 DTO도 선언 가능함
   id!: number;
