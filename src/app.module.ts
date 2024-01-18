@@ -6,6 +6,7 @@ import { DatabaseModule } from './database/database.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule } from '@nestjs/config';
 import { BoardModule } from './domain/board/board.module';
+import { PostModule } from './domain/post/post.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { BoardModule } from './domain/board/board.module';
       autoSchemaFile: true,
     }),
     BoardModule,
+    PostModule,
   ],
   controllers: [AppController],
   providers: [AppService],
