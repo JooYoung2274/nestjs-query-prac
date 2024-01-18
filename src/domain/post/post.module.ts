@@ -1,32 +1,31 @@
 import { Module } from '@nestjs/common';
-import { BoardController } from './board.controller';
-import { BoardService } from './board.service';
 import {
   NestjsQueryGraphQLModule,
   PagingStrategies,
 } from '@ptc-org/nestjs-query-graphql';
 import { NestjsQueryTypeOrmModule } from '@ptc-org/nestjs-query-typeorm';
-import { BoardEntity } from './board.entity';
-
-import { BoardCreateDTO } from './dto/create-board.dto';
-import { BoardUpdateDTO } from './dto/update-board.dto';
-import { PostResolver } from '../post/post.resolver';
+import { PostEntity } from './post.entity';
+import { PostService } from './post.service';
+import { PostController } from './post.controller';
+import { PostResolver } from './post.resolver';
+import { PostCreateDTO } from './dto/create-post.dto';
+import { PostUpdateDTO } from './dto/update-post.dto';
 
 @Module({
   imports: [
     NestjsQueryGraphQLModule.forFeature({
       // import the NestjsQueryTypeOrmModule to register the entity with typeorm
       // and provide a QueryService
-      imports: [NestjsQueryTypeOrmModule.forFeature([BoardEntity])],
-      services: [BoardService],
+      imports: [NestjsQueryTypeOrmModule.forFeature([PostEntity])],
+      services: [PostService],
       // describe the resolvers you want to expose
       resolvers: [
         {
-          EntityClass: BoardEntity,
-          DTOClass: BoardEntity,
-          CreateDTOClass: BoardCreateDTO,
-          UpdateDTOClass: BoardUpdateDTO,
-          ServiceClass: BoardService,
+          EntityClass: PostEntity,
+          DTOClass: PostEntity,
+          CreateDTOClass: PostCreateDTO,
+          UpdateDTOClass: PostUpdateDTO,
+          ServiceClass: PostService,
           enableAggregate: true,
           pagingStrategy: PagingStrategies.OFFSET,
           read: {},
@@ -38,7 +37,7 @@ import { PostResolver } from '../post/post.resolver';
       ],
     }),
   ],
-  controllers: [BoardController],
-  providers: [BoardService, PostResolver],
+  controllers: [PostController],
+  providers: [PostService, PostResolver],
 })
-export class BoardModule {}
+export class PostModule {}
