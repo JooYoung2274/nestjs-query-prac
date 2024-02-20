@@ -42,18 +42,24 @@ export class BoardEntity {
   id!: number;
 
   @Column()
-  @FilterableField()
+  @FilterableField(() => String!, {
+    description: '게시판 제목',
+    nullable: false,
+  })
   title!: string;
 
   @Column()
-  @FilterableField()
+  @FilterableField(() => String!, {
+    description: '게시판 설명',
+    nullable: false,
+  })
   description!: string;
 
   @CreateDateColumn()
   @Field(() => GraphQLISODateTime)
-  created!: Date;
+  created: Date;
 
   @UpdateDateColumn()
   @Field(() => GraphQLISODateTime)
-  updated!: Date;
+  updated: Date;
 }

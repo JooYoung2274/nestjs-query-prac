@@ -58,7 +58,49 @@ query GetBoards {
 ```
 
 - createOneBoard
+
+```typescript
+const Mutataion = `
+mutation CreateOneBoard {
+  createOneBoard(title: String!, description: String!){
+    id
+    title
+    description
+    createdAt
+    updatedAt
+  }
+}`;
+
+// 리턴 값
+```
+
 - createManyBoards
+
+```typescript
+const Mutataion = `
+mutation CreateManyBoards {
+  createManyBoards(input: CreateManyBoardsInput!){
+    id
+    title
+    description
+    createdAt
+    updatedAt
+  }
+}`;
+
+type CreateManyBoardsInput {
+  Boards : {
+    id: ID
+    title: String!
+    description: String!
+    createdAt: Datetime
+    updatedAt: Datetime
+  }
+}
+
+// 리턴 값
+```
+
 - updateOneBoard
 - updateManyBoards
 - deleteOneBoard
